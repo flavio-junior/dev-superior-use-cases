@@ -1,0 +1,10 @@
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Flávio Júnior', '34044456437', 1700.0,  NOW(), 3);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Rafael Antonio', '80479209448', 150.0,  NOW(), 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Amanda Carolliny', '77532636410', 1540.0,  NOW(), 0);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Lindalva Maria', '67079356407', 199.0,  NOW(), 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Amâncio', '86600932406', 1745.0,  NOW(), 3);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Charlie Brown', '28168829425', 121.0,  NOW(), 4);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Rone José', '45101316407', 17.0,  NOW(), 4);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Edycassio', '68311919402', 1900.0,  NOW(), 5);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Marcos', '86542462430', 133.0,  NOW(), 0);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Rau', '89982034480', 700.0,  NOW(), 3);
