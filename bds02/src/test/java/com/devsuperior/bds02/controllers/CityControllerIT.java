@@ -24,75 +24,59 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Transactional
 public class CityControllerIT {
 
-	@Autowired
-	private MockMvc mockMvc;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
-	@Test
-	public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
-		
-		ResultActions result =
-				mockMvc.perform(get("/cities")
-					.contentType(MediaType.APPLICATION_JSON));
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-		result.andExpect(status().isOk());
-		result.andExpect(jsonPath("$.content").exists());
-		result.andExpect(jsonPath("$[0].name").value("Belo Horizonte"));
-		result.andExpect(jsonPath("$[1].name").value("Belém"));
-		result.andExpect(jsonPath("$[2].name").value("Brasília"));
-	}
-	
-	@Test
-	public void insertShouldInsertResource() throws Exception {
+    @Test
+    public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
+        ResultActions result =
+                mockMvc.perform(get("/cities")
+                        .contentType(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isOk());
+        result.andExpect(jsonPath("$[0].name").value("Belo Horizonte"));
+        result.andExpect(jsonPath("$[1].name").value("Belém"));
+        result.andExpect(jsonPath("$[2].name").value("Brasília"));
+    }
 
-		CityDTO dto = new CityDTO(null, "Recife");
-		String jsonBody = objectMapper.writeValueAsString(dto);
-		
-		ResultActions result =
-				mockMvc.perform(post("/cities")
-					.content(jsonBody)
-					.contentType(MediaType.APPLICATION_JSON)
-					.accept(MediaType.APPLICATION_JSON));
-		
-		result.andExpect(status().isCreated());
-		result.andExpect(jsonPath("$.id").exists());
-		result.andExpect(jsonPath("$.name").value("Recife"));
-	}
+    @Test
+    public void insertShouldInsertResource() throws Exception {
+        CityDTO dto = new CityDTO(null, "Recife");
+        String jsonBody = objectMapper.writeValueAsString(dto);
+        ResultActions result =
+                mockMvc.perform(post("/cities")
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isCreated());
+        result.andExpect(jsonPath("$.id").exists());
+        result.andExpect(jsonPath("$.name").value("Recife"));
+    }
 
-	@Test
-	public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {		
-		
-		Long independentId = 5L;
-		
-		ResultActions result =
-				mockMvc.perform(delete("/cities/{id}", independentId));
-		
-		
-		result.andExpect(status().isNoContent());
-	}
+    @Test
+    public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {
+        Long independentId = 5L;
+        ResultActions result =
+                mockMvc.perform(delete("/cities/{id}", independentId));
+        result.andExpect(status().isNoContent());
+    }
 
-	@Test
-	public void deleteShouldReturnNotFoundWhenNonExistingId() throws Exception {		
+    @Test
+    public void deleteShouldReturnNotFoundWhenNonExistingId() throws Exception {
+        Long nonExistingId = 50L;
+        ResultActions result =
+                mockMvc.perform(delete("/cities/{id}", nonExistingId));
+        result.andExpect(status().isNotFound());
+    }
 
-		Long nonExistingId = 50L;
-		
-		ResultActions result =
-				mockMvc.perform(delete("/cities/{id}", nonExistingId));
+    @Test
+    @Transactional(propagation = Propagation.NEVER)
+    public void deleteShouldReturnBadRequestWhenDependentId() throws Exception {
+        Long dependentId = 1L;
+        ResultActions result =
+                mockMvc.perform(delete("/cities/{id}", dependentId));
+        result.andExpect(status().isBadRequest());
+    }
 
-		result.andExpect(status().isNotFound());
-	}
-
-	@Test
-	@Transactional(propagation = Propagation.NEVER) 
-	public void deleteShouldReturnBadRequestWhenDependentId() throws Exception {		
-
-		Long dependentId = 1L;
-		
-		ResultActions result =
-				mockMvc.perform(delete("/cities/{id}", dependentId));
-				
-		result.andExpect(status().isBadRequest());
-	}
 }
