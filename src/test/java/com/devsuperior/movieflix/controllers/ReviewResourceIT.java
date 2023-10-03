@@ -117,7 +117,7 @@ public class ReviewResourceIT {
 	}
 
 	@Test
-	public void insertShouldReturnUnproccessableEntityWhenMemberAuthenticatedAndInvalidData() throws Exception {
+	public void insertShouldReturnUnProccessableEntityWhenMemberAuthenticatedAndInvalidData() throws Exception {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
