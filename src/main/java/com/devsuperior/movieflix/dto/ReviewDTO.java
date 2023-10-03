@@ -4,10 +4,6 @@ import com.devsuperior.movieflix.entities.Review;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 public class ReviewDTO {
 
     private Long id;
@@ -21,7 +17,6 @@ public class ReviewDTO {
     private Long userId;
     private String userName;
     private String userEmail;
-	private List<ReviewDTO> reviews = new ArrayList<>();
 
 	public ReviewDTO() {
 
@@ -43,11 +38,6 @@ public class ReviewDTO {
 		this.userId = entity.getUser().getId();
 		this.userName = entity.getUser().getName();
 		this.userEmail = entity.getUser().getEmail();
-	}
-
-	public ReviewDTO(Review entity, Set<Review> reviews) {
-		this(entity);
-		reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
 	}
 
 	public Long getId() {
@@ -98,11 +88,4 @@ public class ReviewDTO {
 		this.userEmail = userEmail;
 	}
 
-	public List<ReviewDTO> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<ReviewDTO> reviews) {
-		this.reviews = reviews;
-	}
 }
