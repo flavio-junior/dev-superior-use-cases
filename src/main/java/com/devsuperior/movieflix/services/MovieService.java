@@ -1,6 +1,6 @@
 package com.devsuperior.movieflix.services;
 
-import com.devsuperior.movieflix.dto.MovieCardDTO;
+import com.devsuperior.movieflix.dto.MovieDetailsDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
@@ -17,10 +17,10 @@ public class MovieService {
     private MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
-    public MovieCardDTO findById(Long id) {
+    public MovieDetailsDTO findById(Long id) {
         Optional<Movie> obj = movieRepository.findById(id);
         Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-        return new MovieCardDTO(entity);
+        return new MovieDetailsDTO(entity);
     }
 
 }
