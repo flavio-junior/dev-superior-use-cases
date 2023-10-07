@@ -1,5 +1,7 @@
 package com.devsuperior.movieflix.entities;
 
+import com.devsuperior.movieflix.entity.Genre;
+import com.devsuperior.movieflix.entity.Movie;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +9,6 @@ public class MovieTests {
 
 	@Test
 	public void movieShouldHaveCorrectStructure() {
-	
 		Movie entity = new Movie();
 		entity.setId(1L);
 		entity.setTitle("Title");
@@ -16,7 +17,6 @@ public class MovieTests {
 		entity.setYear(2021);
 		entity.setImgUrl("https://imgurl.com/img.png");
 		entity.setGenre(new Genre());
-	
 		Assertions.assertNotNull(entity.getId());
 		Assertions.assertNotNull(entity.getTitle());
 		Assertions.assertNotNull(entity.getSubTitle());
@@ -26,4 +26,5 @@ public class MovieTests {
 		Assertions.assertNotNull(entity.getGenre());
 		Assertions.assertEquals(0, entity.getReviews().size());
 	}
+
 }

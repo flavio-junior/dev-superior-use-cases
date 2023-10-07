@@ -35,7 +35,6 @@ public class UserControllerIT {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		visitorUsername = "bob@gmail.com";
 		visitorPassword = "123456";
 		memberUsername = "ana@gmail.com";
@@ -44,14 +43,11 @@ public class UserControllerIT {
 	
 	@Test
 	public void getProfileShouldReturnSelfWhenVisitorLogged() throws Exception {
-		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
-
 		ResultActions result =
 				mockMvc.perform(get("/users/profile")
 					.header("Authorization", "Bearer " + accessToken)
 					.accept(MediaType.APPLICATION_JSON));
-		
 		result.andExpect(status().isOk());
 		result.andExpect(jsonPath("$.id").isNotEmpty());
 		result.andExpect(jsonPath("$.name").isNotEmpty());
@@ -60,14 +56,11 @@ public class UserControllerIT {
 
 	@Test
 	public void getProfileShouldReturnSelfWhenMemberLogged() throws Exception {
-		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
-
 		ResultActions result =
 				mockMvc.perform(get("/users/profile")
 					.header("Authorization", "Bearer " + accessToken)
 					.accept(MediaType.APPLICATION_JSON));
-		
 		result.andExpect(status().isOk());
 		result.andExpect(jsonPath("$.id").isNotEmpty());
 		result.andExpect(jsonPath("$.name").isNotEmpty());
@@ -76,11 +69,10 @@ public class UserControllerIT {
 
 	@Test
 	public void getProfileShouldReturnUnauthorizedWhenNoUserLogged() throws Exception {
-		
 		ResultActions result =
 				mockMvc.perform(get("/users/profile")
 					.accept(MediaType.APPLICATION_JSON));
-		
 		result.andExpect(status().isUnauthorized());
 	}
+
 }
