@@ -23,10 +23,9 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<Page<MovieCardDTO>> findAll(
-            @RequestParam(value = "name", defaultValue = "") String name,
-            @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
+            @RequestParam(value = "genreId", defaultValue = "0") String genreId,
             Pageable pageable) {
-        Page<MovieCardDTO> list = movieService.findAllPaged(pageable);
+        Page<MovieCardDTO> list = movieService.findAllPaged(genreId, pageable);
         return ResponseEntity.ok().body(list);
     }
 
