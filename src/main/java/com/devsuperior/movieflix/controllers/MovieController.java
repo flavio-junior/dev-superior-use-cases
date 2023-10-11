@@ -22,6 +22,7 @@ public class MovieController {
     private ReviewService reviewService;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('MEMBER')")
     public ResponseEntity<Page<MovieCardDTO>> findAll(
             @RequestParam(value = "genreId", defaultValue = "0") String genreId,
             Pageable pageable) {
