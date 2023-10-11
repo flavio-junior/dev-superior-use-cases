@@ -25,6 +25,12 @@ public class MovieService {
     @Autowired
     private GenreRepository genreRepository;
 
+    @Transactional(readOnly = true)
+    public Page<MovieCardDTO> findAllPaged(Pageable pageable) {
+        Page<Movie> list = movieRepository.findAll(pageable);
+        return list.map(MovieCardDTO::new);
+    }
+
    @Transactional(readOnly = true)
     public Page<MovieCardDTO> findAllPaged(String genreId, Pageable pageable) {
        List<Long> genreIds = List.of();
