@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Query("SELECT obj From Movie obj WHERE obj.genre.id IN :genreId")
+    @Query("SELECT obj FROM Movie obj WHERE obj.genre.id IN :genreId ORDER BY obj.title ASC")
     Page<Movie> searchAll(List<Long> genreId, Pageable pageable);
 
 }

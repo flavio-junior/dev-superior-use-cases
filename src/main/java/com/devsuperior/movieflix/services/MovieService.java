@@ -3,7 +3,6 @@ package com.devsuperior.movieflix.services;
 import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
 import com.devsuperior.movieflix.entities.Movie;
-import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ public class MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
-    @Autowired
-    private GenreRepository genreRepository;
 
     @Transactional(readOnly = true)
     public Page<MovieCardDTO> findAllPaged(Pageable pageable) {
